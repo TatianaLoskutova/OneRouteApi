@@ -4,8 +4,9 @@ import {productsRouter} from './routes/products-router';
 import {addressesRouter} from './routes/addresses-router';
 
 // create express app
-const app = express()
+export const app = express()
 const port = process.env.PORT || 3001
+
 
 // create middlewares
 const parserMiddleware = bodyParser.json()
