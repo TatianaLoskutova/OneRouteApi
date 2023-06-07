@@ -24,8 +24,8 @@ productsRouter.post('/',
         const newProduct: ProductType = await productsRepository.createProduct(req.body.title)
         res.sendStatus(201).send(newProduct)
     })
-productsRouter.get('/:id', (req: Request, res: Response) => {
-    let product = productsRepository.findProductById(+req.params.id)
+productsRouter.get('/:id', async (req: Request, res: Response) => {
+    let product = await productsRepository.findProductById(+req.params.id)
     if (product) {
         res.send(product)
     } else {
@@ -44,8 +44,8 @@ productsRouter.put('/:id',
             res.send(404)
         }
 })
-productsRouter.delete('/:id', (req: Request, res: Response) => {
-    const isDeleted = productsRepository.deleteProduct(+req.params.id)
+productsRouter.delete('/:id', async (req: Request, res: Response) => {
+    const isDeleted = await productsRepository.deleteProduct(+req.params.id)
     if (isDeleted) {
         res.send(204);
     } else {
