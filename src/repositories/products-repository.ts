@@ -22,15 +22,15 @@ export const productsRepository = {
         let product = products.find(p => p.id === id)
         return product;
     },
-    createProduct(title: string) {
-        const newProduct = {
+    async createProduct(title: string) {
+        const newProduct: Promise<ProductType> = {
             id: +(new Date()),
             title: title
         }
         products.push(newProduct)
         return newProduct;
     },
-    updateProduct(id: number, title: string) {
+    async updateProduct(id: number, title: string): Promise<boolean> {
         let product = products.find(p => p.id === id);
         if (product) {
             product.title = title

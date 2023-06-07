@@ -2,6 +2,7 @@ import express, {Request, Response} from 'express'
 import bodyParser from 'body-parser'
 import {productsRouter} from './routes/products-router';
 import {addressesRouter} from './routes/addresses-router';
+import {runDb} from './repositories/db';
 
 // create express app
 export const app = express()
@@ -18,6 +19,11 @@ app.use('/addresses', addressesRouter)
 
 
 // start app (listen port)
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+const startApp = async () => {
+    await runDb()
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`)
+    })
+}
+
+startApp()

@@ -20,8 +20,8 @@ productsRouter.get('/', async (req: Request, res: Response) => {
 productsRouter.post('/',
     titleValidation,
     inputValidationMiddleware,
-    (req: Request, res: Response) => {
-        const newProduct = productsRepository.createProduct(req.body.title)
+    async (req: Request, res: Response) => {
+        const newProduct: ProductType = await productsRepository.createProduct(req.body.title)
         res.sendStatus(201).send(newProduct)
     })
 productsRouter.get('/:id', (req: Request, res: Response) => {
@@ -35,10 +35,10 @@ productsRouter.get('/:id', (req: Request, res: Response) => {
 productsRouter.put('/:id',
     titleValidation,
     inputValidationMiddleware,
-    (req: Request, res: Response) => {
-    const isUpdted = productsRepository.updateProduct(+req.params.id, req.body.title)
-        if (isUpdted) {
-            const product = productsRepository.findProductById(+req.params.id)
+    async (req: Request, res: Response) => {
+    const isUpdated = await productsRepository.updateProduct(+req.params.id, req.body.title)
+        if (isUpdated) {
+            const product: boolean =  productsRepository.findProductById(+req.params.id)
             res.send(product)
         } else {
             res.send(404)
