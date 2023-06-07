@@ -1,9 +1,15 @@
 import {MongoClient} from 'mongodb'
 
+export type ProductType = {
+    id: number
+    title: string
+}
 
 const mongoURI = process.env.MONGO_URL || 'mongodb://0.0.0.0:27017'
 
-export const client = new MongoClient(mongoURI)
+const client = new MongoClient(mongoURI)
+const db = client.db('shop');
+export const productsCollection = db.collection<ProductType>('products');
 
 export async function runDb() {
     try {

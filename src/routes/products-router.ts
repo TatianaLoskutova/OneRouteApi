@@ -38,7 +38,7 @@ productsRouter.put('/:id',
     async (req: Request, res: Response) => {
     const isUpdated = await productsRepository.updateProduct(+req.params.id, req.body.title)
         if (isUpdated) {
-            const product: boolean =  productsRepository.findProductById(+req.params.id)
+            const product: boolean = await productsRepository.findProductById(+req.params.id)
             res.send(product)
         } else {
             res.send(404)
