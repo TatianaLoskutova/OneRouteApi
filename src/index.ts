@@ -14,8 +14,6 @@ const parserMiddleware = bodyParser.json()
 app.use(parserMiddleware)
 
 app.use('/products', productsRouter)
-app.use('/addresses', addressesRouter)
-
 
 
 // start app (listen port)
